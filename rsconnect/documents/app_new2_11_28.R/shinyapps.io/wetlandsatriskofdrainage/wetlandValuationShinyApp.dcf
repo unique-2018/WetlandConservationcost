@@ -1,0 +1,14 @@
+name: wetlandValuationShinyApp
+title: wetlandValuationShinyApp
+username:
+account: wetlandsatriskofdrainage
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5233960
+bundleId: 5310741
+url: https://wetlandsatriskofdrainage.shinyapps.io/wetlandValuationShinyApp/
+when: 1638296287.73638
+lastSyncTime: 1638296287.73638
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: data/black.csv|data/brown.csv|data/Crop%2BPlanning%2BGuide%2B2021.pdf|data/darkbrown.csv|R/CopyOffunctions.R|R/functions.R|www/wetland.jpg|www/wetland2.jpg

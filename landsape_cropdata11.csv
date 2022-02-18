@@ -1,0 +1,31 @@
+﻿crop,soil_zone,avg_crop_price,avg_yield,variable_cost,fixed_cost
+Fallow,black,3.94,0,0,120
+Feed Barley,black,4.37,96.5,235,120
+Malt Barley,black,5.2,78.3,270.4,119.57
+Canola,black,11.25,56,360.23,119.57
+Corn,black,4.85,118,320,110
+Flax,black,14,37.4,228,119.57
+Oats,black,3.33,146,250,119.57
+Yellow Peas,black,7.5,61.4,232,119.57
+Soybean,black,10.93,37.5,255,119.57
+Spring Wheat,black,6.04,68.4,284.23,119.57
+Feed Barley,darkbrown,4.37,85.4,198,110
+Malt Barley,darkbrown,5.2,64,254,109.53
+Canola,darkbrown,11.2,52,340,120
+Corn,darkbrown,4.85,77,312,124
+Flax,darkbrown,14,34.3,233,109.53
+Oats,darkbrown,3.33,110,208.34,110
+Yellow Peas,darkbrown,7.5,52.9,231,109.53
+Soybean,darkbrown,10.93,34.5,247,109.53
+Spring Wheat,darkbrown,6.04,61.4,265,109.53
+Fallow,darkbrown,3.94,0,0,111.24
+Feed Barley,brown,4.37,78.1,185,95
+Malt Barley,brown,5.2,70,241,95.34
+Canola,brown,11.2,48,302,95
+Corn,brown,4.85,77,317.2,110.23
+Flax,brown,14,30.3,194,95.34
+Oats,brown,3.33,81.1,190,95.3
+Yellow Peas,brown,7.5,43.4,215,95.34
+Soybean,brown,10.93,32,241,95.34
+Spring Wheat,brown,6.04,53,248,95.34
+Fallow,brown,3.94,0,0,96.96

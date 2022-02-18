@@ -1,0 +1,14 @@
+name: wetlandValuationTool
+title: wetlandValuationTool
+username:
+account: wetlandsatriskofdrainage
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5506158
+bundleId: 5539541
+url: https://wetlandsatriskofdrainage.shinyapps.io/wetlandValuationTool/
+when: 1643908169.3029
+lastSyncTime: 1643908169.3029
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|~$App_presentation.pptx|~$erManual-V5.docx|~$ownbag_presentation.docx|~WRL1731.tmp|app_10_22.R|app_17_22.R|app_17_22_saved.R|app_18_01_22.R|app_18_22.R|app_19_01_22.R|app_23_01_22.R|functions3.R|functions4.R|functions5.R|landsape_cropdata.csv|landsape_cropdataold.csv|LICENSE|R/CopyOffunctions.R|R/functions.R|trialfunctions.R|UserManual-V4.docx

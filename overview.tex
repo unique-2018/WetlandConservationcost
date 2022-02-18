@@ -1,0 +1,229 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{Overivew}
+\author{Dr.~Eric Asare}
+\date{29/11/2021}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Overivew},
+  pdfauthor={Dr.~Eric Asare},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{overview-section}{%
+\section{\texorpdfstring{ 1.0. Overview Section
+}{ 1.0. Overview Section }}\label{overview-section}}
+
+\textless font size = ``5'', color=`black'\textgreater{} You are here
+because you clicked on the Overview icon in the App shown in Figure 1
+below:
+
+\hypertarget{figure-1.-overview-section}{%
+\subsubsection{\texorpdfstring{ Figure 1. Overview Section
+}{ Figure 1. Overview Section }}\label{figure-1.-overview-section}}
+
+\includegraphics{overview1.png}
+
+\textless font size = ``5'', color=`black'\textgreater{} This section
+summarizes the structure of the App, including how to navigate it. The
+general objective of the App is to estimate the net-present benefit
+(NPB) of wetland drainage at the field level and at the watershed or
+landscape level; it also assesses the effect of changes in crop prices
+on the NPB. Full details on how we calculated NPB and its underlying
+assumptions are provided in a User-guide which can be downloaded using
+the download link to the left of this section. We describe how to
+navigate the field-level and landscape level sections below. In each
+section we state the specific outputs and the inputs users can change
+(user-defined parameters) to change the outputs.
+
+\hypertarget{field-level-section}{%
+\section{\texorpdfstring{ 1.2. Field Level Section
+}{ 1.2. Field Level Section }}\label{field-level-section}}
+
+\textless font size = ``5'', color=`black'\textgreater{} Figure 2 shows
+the Field-level section if click the icon circled in red. You will find
+two main sections which are the user-defined and output section.
+
+\hypertarget{figure-2.-layout-of-the-field-level-section}{%
+\subsubsection{\texorpdfstring{ Figure 2. Layout of the Field-level
+Section
+}{ Figure 2. Layout of the Field-level Section }}\label{figure-2.-layout-of-the-field-level-section}}
+
+\includegraphics{fieldlevel.png}
+
+\textless font size = ``5'', color=`black'\textgreater{} The output
+section shows the results of net-present benefit of wetland drainage
+analysis at the field level. The specific outputs are:
+
+\begin{itemize}
+\tightlist
+\item
+  Plot of present value of cultivated crops on drained wetland area.
+\item
+  Net-present benefit of wetland drainage.\\
+\item
+  Net-present benefit of wetland drainage given percentage change in
+  crop prices.
+\item
+  Annualized Net-present benefit of wetland drainage.\\
+\item
+  Annualized Net-present benefit of wetland drainage given percentage
+  change in crop prices.
+\end{itemize}
+
+\textless font size = ``5'', color=`black'\textgreater{} There are
+variables that are used to produce the outputs above. For instance the
+outputs in figure 2 are generated with default parameters. Users are
+able to change the default parameters with user-defined values which are
+grouped by the 3 grey circles numbered (1) to (3). The grey circles are
+described below:
+
+\begin{itemize}
+\tightlist
+\item
+  grey circle 1: by clicking on this circle, the user is able to change
+  the levels of wetland area (acres), wetland location (at field margin
+  or not), efficiency gain (cost savings from eliminating obstructions
+  to farm-machinery operations due to wetlands), delayed seeding,
+  discount rate and planning horizon.\\
+\item
+  grey circle 2: by clicking on this circle, the user is able to select
+  the soil zone of the field and cultivated crops to edit crop
+  production information.\\
+\item
+  grey circle 3: by clicking on this, the user is able to choose the
+  expected percentage change in crop prices and the direction of change.
+\end{itemize}
+
+\hypertarget{landscape-level-section}{%
+\section{\texorpdfstring{ 1.3. Landscape Level Section
+}{ 1.3. Landscape Level Section }}\label{landscape-level-section}}
+
+\textless font size = ``5'', color=`black'\textgreater{} Figure 3 shows
+the landscape-level section if click the icon circled in red. You will
+find two main sections which are the user-defined and output section.
+
+\hypertarget{figure-3.-layout-of-the-landscape-level-section}{%
+\subsubsection{\texorpdfstring{ Figure 3. Layout of the Landscape-level
+Section
+}{ Figure 3. Layout of the Landscape-level Section }}\label{figure-3.-layout-of-the-landscape-level-section}}
+
+\#\includegraphics{landscape.png}
+
+\textless font size = ``5'', color=`black'\textgreater{} The output
+section shows the results of net-present benefit of wetland drainage
+analysis at the watershed or landscape level. The specific outputs are:
+
+\begin{itemize}
+\tightlist
+\item
+  Wetland drainage supply curve: which shows wetland areas (acres/year)
+  that could be drained for different levels of annualized net-present
+  benefit (ANPB) of drainage.
+\item
+  Annualized net-present benefit of wetland drainage summary table: in
+  the summary table which you can find by clicking on the grey circle
+  below wetland drainage supply curve, we have estimates of:
+
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \tightlist
+  \item
+    percentage of quarter-sections(1 QS = 160 acres) where ANPB
+    \textgreater{} 0; sum of wetland acres in QS where ANPB
+    \textgreater0; wetland acres conserved per year given wetland
+    conservation budget.
+  \item
+    Changes in estimates in (1) for a percentage change in crop prices.
+  \end{enumerate}
+\end{itemize}
+
+\textless font size = ``5'', color=`black'\textgreater{} Users can
+specify their user-defined inputs by clicking on the grey circles number
+(1) to (5). The grey circles are described below:
+
+\begin{itemize}
+\tightlist
+\item
+  grey circle 1: by clicking on this circle, the user is able to view
+  and download the required data for landscape analysis. The user can
+  change the values in the data and upload it in the App.\\
+\item
+  grey circle 2: by clicking on this circle, the user can upload the
+  edited data.\\
+\item
+  grey circle 3: by clicking on this, the user is able to choose the
+  expected percentage change the levels of levels of number of
+  quarter-sections, wetland area (acres), wetland location (at field
+  margin or not), efficiency gain (cost savings from eliminating
+  obstructions to farm-machinery operations due to wetlands), delayed
+  seeding, proportion of soil zones, discount rate and planning horizon.
+\item
+  grey circle 4: by clicking on this circle, the user is able to provide
+  the level of wetland conservation budget.\\
+\item
+  grey circle 5: by clicking on this, the user is able to choose the
+  expected percentage change in crop prices and the direction of change.
+\end{itemize}
+
+\end{document}
