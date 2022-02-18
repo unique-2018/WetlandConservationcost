@@ -10,7 +10,7 @@ library(shinyWidgets)      #custom widgets to enhance shiny applications
 library(shiny)             # main shiny tool
 library(DT)                # Data table package 
 library(tidyverse)         # contains several functions for data wrangling and plotting
-library(shinydashboard)
+library(shinydashboard)    
 #library(flexdashboard)
 library(plotly)            #adding interactivity to ggplots with the ggplotly
 library(rmarkdown)         #for creating documents
@@ -73,7 +73,7 @@ ui <-
       tabPanel(h3("Tool Overview"),                                                        # This is the first section of the App: the overview section where provides summarized information on the App
                fluidRow(
                  column(1), 
-                 column(10, htmltools::includeMarkdown("overview.Rmd")),
+                 column(10, htmltools::includeMarkdown("overview.Rmd")),                   # IncludeMarkdown function allows us to use markdown to write the overview section
                  column(1)
                )),
 
@@ -187,45 +187,7 @@ ui <-
                             plotlyOutput("probability_plot", height = '600px', width = 'auto'),
                             br()
                           )
-                   ))))),
-      tabPanel(h3("Landscape level Analysis"),                                                        # The landscape tab of the app
-               
-               fluidRow(
-                 
-                 sidebarPanel(
-                 
-                 column(12,
-                        
-                        br(),
-                        br(),
-                        tags$h4(p("1. Wetland characteristics", style = "color:black")),
-                        
-                        
-                        numericInput("wetlandacre1", p("How many acres of wetland do you have on your field?", style ="color: black"), 
-                                     value = 0, min = 0.05, max = 37, step = 1),
-                        sliderInput("num_wetland1", p("How many wetlands do you have on your field, if any?", style ="color: black"), min = 0, max = 15, value = 0, step = 1),
-                        sliderInput("delayedseeding1", p("How many years out of 10 do you experience delayed seeding on drained wetland areas?", 
-                                                         style ="color: black"), min = 0, max = 10, value = 0, step = 1),
-                        selectInput("uplandyd_greater1", p("Is upland crop yield greater than yield on drained wetland?", 
-                                                           style ="color: black"), choices = c("greater","equal", "lesser"), selected = "equal"),
-                        sliderInput("ydiff1", "What is the % difference in upland crop yield and drained wetland crop yield", min = 0, max = 50, value = 0, step = 10),
-                        
-                        selectInput("wetland_interference1", p("Does wetlands on your field interfere with farming operation?", 
-                                                           style ="color: black"), choices = c("No", "Yes"), selected = "No"),
-                        numericInput("drainage_cost1", p("What is the annualized cost of draining an acre of wetland on your field?",
-                                                         style ="color: black"), value = 600, min = 0, max = 2000, step = 1),
-                        hr(),
-                        hr(),
-                        numericInput("conservation_budget", p("Wetland conservation budget to conserve wetland areas in the landscape?",
-                                                              style ="color: black"), value = 100000, min = 1000, max = 1000000000, step = 1000),
-                        numericInput("policy", p("Pencentage of highest quality fields to conserve wetlands?",
-                                                 style ="color: black"), value = 25, min = 1, max = 100, step = 5))),
-                 mainPanel(
-                 column(11, 
-                        DT::dataTableOutput("wetland_summary1")),
-                 
-                 column(1)
-               )))
+                   )))))
       
       )
     )
@@ -390,38 +352,7 @@ server <- function(input, output) {
   
 
 ######################################### Landscape analysis section  
-  
-  
-  df_landscape <- reactive({
-    
-    nc <- nc_df()[1,] #%>% filter(implement_width == input$implement_width) %>% select(input$num_wetland)
-    
-    
-    A <- editable_fl()() %>%
-      dplyr::mutate(prod_cost = variable_cost + fixed_cost,
-                    num_crops = length(input$Cultivated_crops),
-                    proportion_cultivated = 1/num_crops,
-                    number_fields = 20,
-                    expand_factor = as.integer(proportion_cultivated * number_fields),
-                    wetland_interference = as.numeric(ifelse(input$wetland_interference1 == "No", 0,1)),
-                    number_wetlands = input$num_wetland1,
-                    wetland_acre = as.numeric(input$wetlandacre1),
-                    loss = as.numeric(ifelse(wetland_acre==0 |input$num_wetland1==0, 0, nc*0.5)),
-                    nuisance_cost = as.numeric(ifelse(wetland_interference==0,  0, loss))
-                    
-                    ) 
-    
-    B <- expandRows(A, "expand_factor")
-    return(B)
-    
-  })
-    
-    
-  output$wetland_summary1 <- DT::renderDataTable({
-    
-    sum <- df_farmacre_wl() %>% select(number_wetlands, wetland_acre) #%>% rename(Number_wetlands = number_wetlands, Wetland_acreage = wetland_acre)
-    DT::datatable(df_landscape(),  options = list(dom = "t", columnDefs = list(list(className = 'dt-center', targets = "_all"))), rownames = FALSE)
-  })
+
 }
 
 shinyApp(ui = ui, server = server)

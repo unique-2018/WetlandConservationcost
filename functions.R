@@ -1,6 +1,14 @@
+#####################################################Annual net return functions#################################################
+#.Theere are three functions which are 
+#1) NPB_prop_fl: estimates annual net returns of cultivated crops with intact wetlands
+#2) NPB_prop_flwl: estimates annual net returns of cultivated crops with drained wetland  areas
+#3) simulated_npv: estimates uncertainties around annual net returns of cultivated crops
+
+
 
  #________________________________________________________________Net-Present value___________________________________
-      #0nly wetland
+#1. Annual Net Returns (with intact wetland areas)
+
 NPB_prop_fl <- function(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre, farm_acre_wl, wetland_acre, delayed_seeding, 
                         nuisance_cost, discount_rate, planning_horizon, af) {
   
@@ -10,18 +18,19 @@ NPB_prop_fl <- function(crop_price, yield,  yield_wl, proportion_cultivated, pro
   
   for(t in 0:planning_horizon){
  
-    disc_profit = (((crop_price * yield*(proportion_cultivated*farm_acre)) - nuisance_cost) - proportion_cultivated*production_cost*farm_acre)*(1/(1+discount_rate)^t)
+    disc_profit = (((crop_price * yield*(proportion_cultivated*farm_acre)) - nuisance_cost)       # Total production revenue net nuisance cost
+                   - proportion_cultivated*production_cost*farm_acre)*(1/(1+discount_rate)^t)     # Total production cost
     
-    pv = pv + disc_profit 
+    pv = pv + disc_profit                                                                         # sums the discounted profit over the planning horizon
 
   }
   
-  annual_nr = ((pv)/farm_acre_wl) * af
-  return(annual_nr)
+  annual_nr = ((pv)/farm_acre_wl) * af                                                            # annualized net returns with the annualized factor (af)
+  return(annual_nr)                                                                               # returns the annualized returns
 }
 
 
-# With Wetlands
+#2. Annual Net Returns (with drained wetland areas)
       
 NPB_prop_flwl <- function(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre, farm_acre_wl, wetland_acre, delayed_seeding, 
                         nuisance_cost, discount_rate, planning_horizon, drainage_cost, af) {
@@ -32,11 +41,11 @@ NPB_prop_flwl <- function(crop_price, yield,  yield_wl, proportion_cultivated, p
   
   for(t in 0:planning_horizon){
     
-      discounted_profit = ((((crop_price * (yield)*(proportion_cultivated*farm_acre)) 
-                   + delayed_seeding*(crop_price*(yield_wl)*(proportion_cultivated*wetland_acre))) 
-                   - (proportion_cultivated*production_cost*farm_acre  
-                   + delayed_seeding*proportion_cultivated*production_cost*wetland_acre))
-                   * (1/(1+discount_rate)^t))
+      discounted_profit = ((((crop_price * (yield)*(proportion_cultivated*farm_acre))                # production revenue of cultivated crops on upland area
+                   + delayed_seeding*(crop_price*(yield_wl)*(proportion_cultivated*wetland_acre)))   # production revenue of cultivated crops on drained wetland area
+                   - (proportion_cultivated*production_cost*farm_acre                                # production cost of cultivated crops on upland area
+                   + delayed_seeding*proportion_cultivated*production_cost*wetland_acre))            # production cost of cultivated crops on drained wetland area
+                   * (1/(1+discount_rate)^t)) 
     
     pv = pv + discounted_profit
     
@@ -46,6 +55,8 @@ NPB_prop_flwl <- function(crop_price, yield,  yield_wl, proportion_cultivated, p
   return(annual_nr)
   }
 
+
+#3. Uncertainties around annual net returns
 
   simulated_npv <- function(df) { 
   sim = df[1, "simulations"] %>% pluck(1)
@@ -63,20 +74,26 @@ NPB_prop_flwl <- function(crop_price, yield,  yield_wl, proportion_cultivated, p
     
     seed = 100
     
+    # The variables created below(such as drainage cost) allows this function to estimate uncertainties. Also, it could allow it to turn off uncertainties on specified variables
+    
     df <- df %>% mutate(drainage_cost = dplyr::if_else(drainagecostsimulation ==1, unlist(pmap_dbl(list(n=1, min_drainage_cost, max_drainage_cost, dr_cost),rtriangle)), dr_cost),
                         yield = dplyr::if_else(yieldsimulation==1, unlist(pmap_dbl(list(n=1, min_yield, max_yield, avg_yield),rtriangle)), avg_yield),
                         yield_wl = yd_diff +  dplyr::if_else(yieldsimulation==1, unlist(pmap_dbl(list(n=1, min_yield, max_yield, avg_yield),rtriangle)), avg_yield),
                         production_cost = dplyr::if_else(productioncostsimulation==1, unlist(pmap_dbl(list(n=1, min_prod_cost, max_prod_cost, prod_cost),rtriangle)), prod_cost),
                         crop_price = dplyr::if_else(pricesimulation==1, unlist(pmap_dbl(list(n=1, min_crop_price, max_crop_price, avg_crop_price),rtriangle)), avg_crop_price),
-                        
+     
+     # The NPB_prop_fl is used to estimate the annual net returns (with intact wetland areas) and also estimate the uncertainties around for certain variables if needed              
       npv_fl = round(unlist(pmap_dbl(list(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre,
                                             farm_acre_wl, wetland_acre, delayed_seeding, 
                                             nuisance_cost, discount_rate, planning_horizon),NPB_prop_fl)),2),
-      
-      npv_flwl = round(unlist(pmap_dbl(list(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre, 
+    
+     # The NPB_prop_flwl is used to estimate the annual net returns (with drained wetland areas) and also estimate the uncertainties around for certain variables if needed              
+     npv_flwl = round(unlist(pmap_dbl(list(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre, 
                                                                           farm_acre_wl, wetland_acre, delayed_seeding, 
                                                                           nuisance_cost, discount_rate, planning_horizon, drainage_cost),NPB_prop_flwl)),2),
-      npv_wl = npv_flwl - npv_fl) 
+     
+     # We estimate the difference between the annual net returns of fields with drained wetland areas and fields with intact wetland areas. It is also wetland conservation cost            
+     npv_wl = npv_flwl - npv_fl) 
     
     sum_npv_fl <- sum(df$npv_fl) 
     sum_npv_flwl <- sum(df$npv_flwl) 
@@ -109,6 +126,7 @@ NPB_prop_flwl <- function(crop_price, yield,  yield_wl, proportion_cultivated, p
   drainage_cost_sim1 = as.numeric(unlist(drainage_cost_sim))
   wetlandacre_sim1 = as.numeric(unlist(wetlandacre_sim))
   
+  #simulated data which can be downloaded
   anpb_sim_df <- data.frame(npv_fl = npv_sim_fl1, npv_flwl = npv_sim_flwl1, npv_wl = npv_sim_wl1, wetlandarea = wetlandacre_sim1, cropprice = crop_price_sim1, 
                             cropyield = yield_sim1, productioncost = production_cost_sim1,drainagecost = drainage_cost_sim1)
   
