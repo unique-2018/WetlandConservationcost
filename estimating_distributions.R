@@ -1,3 +1,5 @@
+#https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3210035901
+#https://r-forge.r-project.org/scm/viewvc.php/*checkout*/JSS/fitdistrplus/paper2JSS.pdf?revision=236&root=riskassessment&pathrev=236
 source("functions_yield_price_data.R")
 source("functions_dist.R")
 

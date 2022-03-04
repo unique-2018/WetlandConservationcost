@@ -4,16 +4,28 @@
 # The code has been structured into 3 main parts
 
 #__________ Part A : libraries
-options(repos = "https://cran.rstudio.com")
+#options(repos = "https://cran.rstudio.com")
 
-if (!require(pacman)) {
-  install.packages("pacman")
-  library(pacman)}
+#if (!require(pacman)) {
+  #install.packages("pacman")
+ # library(pacman)}
 
 # Load Packages
-p_load(shinythemes, shinyWidgets,shiny,DT,tidyverse,shinydashboard,flexdashboard,plotly,rmarkdown,htmltools,markdown,triangle,splitstackshape, lattice, Rmisc,packrat,shinythemes)
+#p_load(shinythemes, shinyWidgets,shiny,DT,tidyverse,shinydashboard,flexdashboard,plotly,htmltools,triangle,splitstackshape, lattice, Rmisc,packrat,shinythemes)
 
-
+library(shinythemes)
+library(shinyWidgets)
+library(shiny)
+library(DT)
+library(tidyverse)
+library(shinydashboard)
+library(flexdashboard)
+library(plotly)
+library(rmarkdown)
+library(htmltools)
+library(markdown)
+library(triangle)
+library(Rmisc)
 #___________ Part B: Custom defined functions
 #options(warn=-1)
 #_______1. Thus script contains functions that are used to estimate the annual net returns of crop production and uncertainties around the estimates
@@ -48,7 +60,7 @@ modDt <-  function(input, output, session, data){ # Server module
 
 ui <- 
   
-  fluidPage(                                                                             # FluidPage function is used to 
+  fluidPage( 
     
     useShinydashboard(), # added this
     
@@ -95,7 +107,7 @@ ui <-
                                 
                                 numericInput("wetlandacre", p("How many acres of wetland do you have on your field?", style ="color: black"), 
                                              value = 0, min = 0.05, max = 37, step = 1),
-                                sliderInput("num_wetland", p("How many wetlands do you have on your field, if any?", style ="color: black"), min = 0, max = 15, value = 0, step = 1),
+                                sliderInput("num_wetland", p("How many wetlands do you have on your field, if any?", style ="color: black"), min = 0, max = 15, value = 2, step = 1),
                                 sliderInput("delayedseeding", p("How many years out of 10 do you experience delayed seeding on drained wetland areas?", 
                                                                 style ="color: black"), min = 0, max = 10, value = 0, step = 1),
                                 selectInput("uplandyd_greater", p("Is upland crop yield greater than yield on drained wetland?", 
@@ -138,17 +150,26 @@ ui <-
                                 
                               ),
                               hr(),
-                              tags$h4(p("4.  Uncertainty using the triangular distribution.", style = "color:black")),
+                              tags$h4(p("4.  Uncertainty using best fit empirical distributions of real data (except drainage cost and production cost which varies around the mean by +/- 30% of the mean).", style = "color:black")),
                               tags$h4(tags$em("Variables: Number of simulations. yield, crop price, drainage cost and production cost variability")),
                               
                               dropdownButton(
                                 tags$h3("List of Input"),
                                 numericInput("number_simulation", p("How many iterations should the simulation run?",
                                                                     style ="color: black"), value = 100, min = 50, max = 100000, step = 100),
-                                sliderInput("yd_variability", p("Range of crop yield variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10),
-                                sliderInput("cp_variability", p("Range of crop price variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10),
-                                sliderInput("pc_variability", p("Range of production cost variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10),
-                                sliderInput("dc_variability", p("Range of drainage cost variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10)),
+                                #sliderInput("yd_variability", p("Range of crop yield variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10),
+                                selectInput("yd_var", p("Do you want to put variability around yield?", 
+                                                                      style ="color: black"), choices = c("No", "Yes"), selected = "No"),
+                                selectInput("cp_var", p("Do you want to put variability around crop_price?", 
+                                                                 style ="color: black"), choices = c("No", "Yes"), selected = "No"),
+                                selectInput("pc_var", p("Do you want to put variability around production_cost?", 
+                                                                 style ="color: black"), choices = c("No", "Yes"), selected = "No"),
+                                selectInput("dc_var", p("Do you want to put variability around drainage cost?", 
+                                                                 style ="color: black"), choices = c("No", "Yes"), selected = "No")),
+                                #sliderInput("cp_variability", p("Range of crop price variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10),
+                                #sliderInput("pc_variability", p("Range of production cost variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10),
+                                #sliderInput("dc_variability", p("Range of drainage cost variability (%):", style ="color: black"), min = 0, max = 50, value = 0, step = 10)),
+                              
                               hr(),
                               tags$h4(p("5.  Download simulated data.", style = "color:black")),
                               dropdownButton(
@@ -205,13 +226,13 @@ ui <-
                             selectInput("havewl", p("Do you have wetlands on the fields in the landscape?", 
                                                     style ="color: black"), choices = c("No", "Yes"), selected = "Yes"),
                             sliderInput("min_wetlandacre", p("What is the minimum wetland acreage on the fields in the landscape?", style ="color: black"), 
-                                        value = 5, min = 0, max = 10, step = 0.5),
+                                        value = 0, min = 0, max = 10, step = 0.5),
                             sliderInput("max_wetlandacre", p("What is the maximum wetland acreage on the fields in the landscape?:",
                                                              style ="color: black"), value = 37, min = 10.5, max = 100, step = 10),
                             sliderInput("min_num_wetland", p("What is the minimum number of wetlands on the fields in the landscape?", style ="color: black"), 
-                                        value = 10, min = 0, max = 10, step = 0.5),
+                                        value = 0, min = 0, max = 10, step = 0.5),
                             sliderInput("max_num_wetland", p("What is the maximum number of wetlands on the fields in the landscape?:",
-                                                             style ="color: black"), value = 37, min = 10.5, max = 100, step = 10),
+                                                             style ="color: black"), value = 4, min = 10.5, max = 100, step = 10),
                             sliderInput("delayedseeding1", p("How many years out of 10 do you experience delayed seeding on drained wetland areas?", 
                                                              style ="color: black"), min = 0, max = 10, value = 0, step = 1),
                             selectInput("uplandyd_greater1", p("Is upland crop yield greater than yield on drained wetland?", 
@@ -349,22 +370,10 @@ server <- function(input, output) {
                     planning_horizon = as.numeric(input$planning_horizon),           # planning horizon for net present estimate
                     dr_cost = as.numeric(input$drainage_cost),                       # drainage cost
                     simulations = as.numeric(input$number_simulation),               # the number of times to estimate annual net returns
-                    yd_variability = input$yd_variability,                           # the variability variables drives the uncertainty around the annual net returns
-                    yieldsimulation = as.numeric(ifelse(yd_variability > 0, 1,0)),
-                    min_yield = as.numeric(avg_yield - (avg_yield*(100 -(input$yd_variability))/100)),
-                    max_yield = as.numeric(avg_yield + (avg_yield*(100 +(input$yd_variability))/100)),
-                    cp_variability = input$cp_variability, 
-                    pricesimulation = as.numeric(ifelse(cp_variability > 0, 1,0)),
-                    min_crop_price = as.numeric(avg_crop_price - (avg_crop_price*(100 -(input$cp_variability))/100)),
-                    max_crop_price = as.numeric(avg_crop_price + (avg_crop_price*(100 +(input$cp_variability))/100)),
-                    dc_variability = input$dc_variability, 
-                    drainagecostsimulation = as.numeric(ifelse(dc_variability > 0, 1,0)),
-                    min_drainage_cost = as.numeric(dr_cost - (dr_cost*(100 -(input$dc_variability))/100)),
-                    max_drainage_cost = as.numeric(dr_cost + (dr_cost*(100 +(input$dc_variability))/100)),
-                    pc_variability = input$pc_variability, 
-                    productioncostsimulation = as.numeric(ifelse(pc_variability > 0, 1,0)),
-                    min_prod_cost = as.numeric(prod_cost - (prod_cost*(100 -(input$pc_variability))/100)),
-                    max_prod_cost = as.numeric(prod_cost + (prod_cost*(100 +(input$pc_variability))/100)),
+                    yieldsimulation1 = as.numeric(ifelse(input$yd_var == "Yes",1,0)),
+                    pricesimulation1 = as.numeric(ifelse(input$cp_var == "Yes",1,0)),
+                    drainagecostsimulation1 = as.numeric(ifelse(input$dc_var == "Yes", 1,0)),
+                    productioncostsimulation1 = as.numeric(ifelse(input$pc_var == "Yes", 1,0)),
                     upland_wtland_yd = case_when(                                 # This is where the yield differences between upland area and drained area is defined
                       input$uplandyd_greater == "greater" ~ 1,
                       input$uplandyd_greater == "equal" ~ 2,
