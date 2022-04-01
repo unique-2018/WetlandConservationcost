@@ -2,6 +2,7 @@
 ################################# replicate number fields
 library(tidyverse)
 source("totalcost.R")
+set.seeed(1)
 fieldData <- read_csv("landsape_cropdata11.csv")                                   # Read the crop production information guide data
 landscape_df <- function(df, num){
   out = NULL
@@ -43,10 +44,4 @@ landscape_df <- function(df, num){
   }
   return(out)
 }
-
-
-#df_trial <- data.frame(
- # crop = c("Canola", "Feed Barley", "Malt Barley", "Yellow Peas"),
- # proportion = c(0.25, 0.25, 0.25, 0.25)
-#)
 

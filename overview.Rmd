@@ -14,7 +14,7 @@ output:
 The wetland valuation tool is an interactive decision tool that analyses the financial implications of wetland drainage in an agricultural field. Specifically, it answers the following questions:  
 * What is the cost to the farmer for conserving wetlands on an agricultural field?  
 * How many acres of wetlands can society save given a conservation budget in an agricultural landscape?  
-* How much it will cost society to conserve wetland areas in the highest quality fields in an agricultural landscape? 
+* How much it will cost society to conserve different categories of wetland areas (in terms of their hypothetical ecosystem function values or qualities) in an agricultural landscape? 
 
 
 </font>
@@ -23,18 +23,18 @@ The wetland valuation tool is an interactive decision tool that analyses the fin
 
 <font size = "5", color='black'>
 
-The tool was developed for stakeholders of wetland conservation in the Canadian Prairies, including agricultural producers, researchers and policymakers. Through this tool, users would be able to assess the financial implications of wetland drainage/retention on agricultural agricultural fields and how much it may cost society to conserve the wetland areas.
+The tool was developed for stakeholders of wetland conservation in the Canadian Prairies, including agricultural producers, researchers and policymakers. Through this tool, users would be able to assess the financial implications of wetland drainage/retention on agricultural fields and how much it may cost society to conserve the wetland areas.
 
 </font>
 
 ## <font color = "black"> 1.2. How do you use the tool? </font>
 
 <font size = "5", color='black'>
-The level of analysis of this tool is grouped into the field level and landscape level. The field level analyses the financial implication of wetland drainage on an agricultural field whiles the landscape level is at the agricultural landscape level (which is made of many fields).
+The level of analysis of this tool is grouped into the field level and landscape level. The field-level analyses the financial implication of wetland drainage on an agricultural field whiles the landscape level is at the agricultural landscape level (which is made of many fields).
 
 ### <font color = "black"> 1.2.1. Field Level analysis </font>
 
-A primary output of the field level analysis is the annual net returns of wetlands that are converted to croplands. To estimate this, the user must, first, select the soil zone and the crops that will be cultivated on the field, including wetland areas; the selections will show a table where the user can edit with information on crop prices, yield and production cost relevant to the field. Also, the user is able to influence the annual returns of wetland drainage by changing the levels of other variables that are grouped into:  
+A primary output of the field level analysis is the annual net returns of wetlands that are converted to croplands. To estimate this, the user must, first, select the province (Saskatchewan, Alberta and Manitoba) field is located, the soil zone and the crops that will be cultivated on the field, including wetland areas; the selections will show a table where the user can edit with information on crop prices, yield and production cost relevant to the field. Also, the user can influence the annual returns of wetland drainage by changing the levels of other variables that are grouped into:  
 
 <u> *A. Wetland characteristics and upland/drained area yield differences* </u>  
 
@@ -44,20 +44,24 @@ Here the user is able to change the levels of the wetland area, the number and l
 
 The user is able to change the levels of discount factor and the farm planning horizon. Again, the user can specify the percentage dispersion (variability) of crop yield, production cost, crop price, drainage cost around their means.
 
-<u> *C. Simulation control variables* </u>  
+<u> *C. Post Processing* </u>  
 
-The user is able to specify the levels of number of iterations or number of times to estimate annual net returns of cultivated wetland areas. Also, they can turn off certain aspects of the simulation. For instance, they can assess only the impact of changes in crop prices on annual net returns of cultivated wetland areas by turning on crop price simulation and the others off. 
+Here, the user will be able to assess how the outputs of the App will change for percentage changes of the main variables in the App (crop prices, crop yields, production cost and drainage cost).
 
-Lastly we will be able to download the simulated data by clicking on the download button.
+<u> *D. Simulation control variables* </u>  
+
+The user is able to specify the levels of the number of iterations or number of times to estimate annual net returns of cultivated wetland areas. Also, they can turn off certain aspects of the simulation. For instance, they can assess only the impact of changes in crop prices on annual net returns of cultivated wetland areas by turning on crop price simulation and the others off. 
+
+Lastly, the user can download all the data generated in this App by clicking on the download button.
 
 ### <font color = "black"> 1.2.2. Landscape Level Analysis </font>
 
-The data that will be used for the landscape level analysis is generated from the field level analysis. We created a function that generates the number of fields in the landscape. Depending on the crops selected for a soil zone, 1/n (where n is number of crops) proportion of the fields in the landscape are used to cultivate a crop. In addition, the user will be able to specify a wetland conservation budget to estimate the wetland areas that could be conserved with the budget. Also, the user will be able to specify the percentage of high quality fields in the landscape to estimate the cost of conserving wetlands in selected fields. 
+We generated the number of fields in the landscape based on a user-defined number of fields value. Also, we assigned crop yields and crop prices to the fields based on estimated empirical distributions of historical data (Statistics Canada, 2022) of the crops used in this App. We assumed uniform distribution for drainage cost and production cost. Depending on the crops selected for a province and soil zone, 1/n (where n is the number of crops) proportion of the fields in the landscape is used to cultivate a crop. Again, similar to the field level analysis, the user is able to change other key variables, including wetland characteristics, that shape the outputs of this section.      
 
 
 ## <font color = "black"> 1.3. Who designed the tool? </font>
-A group of research scientists at the Department of Agriculture and Resource Economics, University of Saskatchewan, designed this tool.  
-For more information, please contact [Dr. Eric Asare](eric.asare@usask.ca). 
+Dr Eric Asare led a group of research scientists (Dr. Kenneth Belcher and Dr. Patrick Lloyd-Smith) at the Department of Agriculture and Resource Economics, University of Saskatchewan, to develop this tool.  
+For more information, please contact [Dr. Patric Lloyd-Ssmith](patrick.lloydsmith@usask.ca). 
 </font>
 
 

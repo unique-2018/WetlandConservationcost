@@ -38,6 +38,7 @@ price_summary_plots(df=flax_price)
 price_df(df=prices, province = "Alberta")
 
 canola_price <- read_csv("data/ Canola (including rapeseed) [113111] .csv") %>% drop_na() %>% mutate(value = VALUE *0.03)
+view(canola_price)
 wheat_price <- read_csv("data/ Wheat (except durum wheat) [1121111] .csv") %>% drop_na() %>% mutate(value = VALUE *0.03)
 peas_price <- read_csv("data/ Dry peas [114314] .csv") %>% drop_na() %>% mutate(value = VALUE *0.03)
 flax_price <- read_csv("data/ Flaxseed [115122111] .csv") %>% drop_na() %>% mutate(value = VALUE *0.03)

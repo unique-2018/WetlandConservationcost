@@ -74,54 +74,50 @@ NPB_prop_flwl <- function(crop_price, yield,  yield_wl, proportion_cultivated, p
   
   for (i in 1:sim) {
     
-    seed = 100
+    seed = 1
     
     # The variables created below(such as drainage cost) allows this function to estimate uncertainties. Also, it could allow it to turn off uncertainties on specified variables
     
-    df <- df %>% dplyr::mutate(
-                        drainage_cost = dplyr::if_else(drainagecostsimulation1 ==1, unlist(pmap_dbl(list(n=1, dr_cost*0.3, dr_cost*1.3, dr_cost),rtriangle)), dr_cost),
-                        yield_sim = case_when(
-                          crop == "Canola" ~ round(rgamma(n=1, shape=7.34, rate=0.11), 2),  #"Feed Barley", "Malt Barley", "Yellow Peas", "Soybean", "Canola", "Corn", "Flax", "Spring Wheat", "Oats", "Fallow"
-                          crop == "Feed Barley" ~ round(rweibull(n=1 , shape=2.53, scale =80), 2),
-                          crop == "Malt Barley" ~ round(rweibull(n=1 , shape=2.53, scale =80), 2),
-                          crop == "Yellow Peas" ~ round(runif(n=1 , 0, 1), 2),  
-                          crop == "Soybean" ~ round(runif(1 , 20, 50), 2), #i can use a normal distribution 
-                          crop == "Corn" ~ round(runif(n=1 , 50, 130), 2), #corn no data use normal
-                          crop == "Flax" ~ round(rweibull(n=1 , shape=2.18, scale = 35), 2),
-                          crop == "Spring Wheat" ~ round(rweibull(n=1 , shape= 2.48, scale=80), 2),
-                          crop == "Oat" ~ round(rgamma(n=1, shape=4.59, rate=0.03), 2),
-                          crop == "Fallow" ~ 0
-                        ),
-                        yield = dplyr::if_else(yieldsimulation1==1, yield_sim, avg_yield),
-                        yield_wl = yd_diff +  yield,
-                        crop_price_sim = case_when(
-                          crop == "Canola" ~ round(rgamma(n=1 , shape=10.5, rate=0.91), 2),  
-                          crop == "Feed Barley" ~ round(rgamma(n=1 , shape=7.54, rate=1.65), 2),
-                          crop == "Malt Barley" ~ round(rgamma(n=1 , shape=7.54, rate=1.65), 2),
-                          crop == "Yellow Peas" ~ round(rlnorm(1 , 1.85, 0.30), 2),
-                          crop == "Soybean" ~ round(rgamma(n=1 , shape=15.34, rate=1.34), 2),
-                          crop == "Corn" ~ round(runif(n=1 , 0, 1), 2),                            #no data
-                          crop == "Flax" ~ round(rlnorm(n=1 , 2.33, 0.42), 2),
-                          crop == "Spring Wheat" ~ round(rlnorm(n=1 , 2, 0.13), 2),
-                          crop == "Oat" ~ round(rgamma(n=1 , shape=8.52, rate=1.86), 2),
-                          crop == "Fallow" ~ 0
-                        ),
-                        crop_price = dplyr::if_else(pricesimulation1==1, crop_price_sim, avg_crop_price),
-                        production_cost = dplyr::if_else(productioncostsimulation1==1, unlist(pmap_dbl(list(n=1, prod_cost*0.7, prod_cost*1.7, prod_cost),rtriangle)), prod_cost),
+      df <- df %>% dplyr::mutate(
+        
+        drainage_cost = dplyr::if_else(drainagecostsimulation1 ==1, unlist(pmap_dbl(list(n=1, dr_cost*0.3, dr_cost*1.3, dr_cost),rtriangle)), dr_cost),
+        
+        yield_sim = case_when(
+          crop == "Canola" ~ round(rlnorm(n=1, 3.15, 0.35), 2),
+          crop == "Feed Barley" ~ round(runif(n=1 , 16.5, 75.9), 2),
+          crop == "Malt Barley" ~ round(rweibull(n=1 , 16.5, 75.9), 2),
+          crop == "Yellow Peas" ~ round(runif(n=1 , 10, 47.1), 2),  
+          crop == "Spring Wheat" ~ round(rgamma(n=1, shape= 5.14, rate=0.18), 2),
+          crop == "Oat" ~ round(runif(n=1, 20, 95.1), 2),
+          crop == "Fallow" ~ 0
+        ),
+        yield = dplyr::if_else(yieldsimulation1==1, yield_sim, avg_yield),
+        
+        yield_wl = yd_diff +  yield,
+        crop_price_sim = case_when(
+          crop == "Canola" ~ round(rgamma(n=1, shape=32, rate=2), 2),  
+          crop == "Feed Barley" ~ round(runif(n=1, 3.8, 8.6), 2),
+          crop == "Malt Barley" ~ round(runif(n=1, 3.8, 8.6), 2),
+          crop == "Yellow Peas" ~ round(runif(n=1, 5.3, 12.4), 2),
+          crop == "Spring Wheat" ~ round(runif(n=1, 7.4, 10.2), 2),
+          crop == "Oat" ~ round(runif(n=1, 3.7, 8.7), 2),
+          crop == "Fallow" ~ 0
+        ),
+        crop_price = dplyr::if_else(pricesimulation1==1, crop_price_sim, avg_crop_price),
+        production_cost = dplyr::if_else(productioncostsimulation1==1, unlist(pmap_dbl(list(n=1, prod_cost*0.7, prod_cost*1.7, prod_cost),rtriangle)), prod_cost),
+        
+  # The NPB_prop_fl is used to estimate the annual net returns (with intact wetland areas) and also estimate the uncertainties around for certain variables if needed              
+  npv_fl = round(unlist(pmap_dbl(list(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre,
+                                        farm_acre_wl, wetland_acre, delayed_seeding, 
+                                        nuisance_cost, discount_rate, planning_horizon),NPB_prop_fl)),2),
 
-     
-     # The NPB_prop_fl is used to estimate the annual net returns (with intact wetland areas) and also estimate the uncertainties around for certain variables if needed              
-      npv_fl = round(unlist(pmap_dbl(list(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre,
-                                            farm_acre_wl, wetland_acre, delayed_seeding, 
-                                            nuisance_cost, discount_rate, planning_horizon),NPB_prop_fl)),2),
-    
-     # The NPB_prop_flwl is used to estimate the annual net returns (with drained wetland areas) and also estimate the uncertainties around for certain variables if needed              
-     npv_flwl = round(unlist(pmap_dbl(list(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre, 
-                                                                          farm_acre_wl, wetland_acre, delayed_seeding, 
-                                                                          nuisance_cost, discount_rate, planning_horizon, drainage_cost),NPB_prop_flwl)),2),
-     
-     # We estimate the difference between the annual net returns of fields with drained wetland areas and fields with intact wetland areas. It is also wetland conservation cost            
-     npv_wl = npv_flwl - npv_fl) 
+ # The NPB_prop_flwl is used to estimate the annual net returns (with drained wetland areas) and also estimate the uncertainties around for certain variables if needed              
+ npv_flwl = round(unlist(pmap_dbl(list(crop_price, yield,  yield_wl, proportion_cultivated, production_cost, farm_acre, 
+                                                                      farm_acre_wl, wetland_acre, delayed_seeding, 
+                                                                      nuisance_cost, discount_rate, planning_horizon, drainage_cost),NPB_prop_flwl)),2),
+ 
+ # We estimate the difference between the annual net returns of fields with drained wetland areas and fields with intact wetland areas. It is also wetland conservation cost            
+ npv_wl = npv_flwl - npv_fl) 
     
     sum_npv_fl <- sum(df$npv_fl) 
     sum_npv_flwl <- sum(df$npv_flwl) 

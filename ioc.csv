@@ -1,28 +1,37 @@
-,crop,soil_zone,input_cost,machinery_oc
-1,Feed Barley,brown,129.99,21.32
-2,Feed Barley,darkbrown,137.83,25.55
-3,Feed Barley,black,168.8,30.74
-4,Malt Barley,brown,186.2,21.32
-5,Malt Barley,darkbrown,193.19,25.55
-6,Malt Barley,black,204.48,30.74
-7,Corn,brown,229.9,25.38
-8,Corn,darkbrown,218.95,29.97
-9,Corn,black,259.97,35.62
-10,Oats,brown,132.24,21.32
-11,Oats,darkbrown,145.61,25.55
-12,Oats,black,180.93,30.74
-13,Spring Wheat,brown,191.79,21.32
-14,Spring Wheat,darkbrown,204.09,25.55
-15,Spring Wheat,black,216.21,30.74
-16,Canola,brown,239,22.05
-17,Canola,darkbrown,273.5,26.46
-18,Canola,black,286.87,31.88
-19,Flax,brown,135.45,21.32
-20,Flax,darkbrown,170.97,25.55
-21,Flax,black,160.1,30.74
-22,Soybean,brown,182.82,22.77
-23,Soybean,darkbrown,183.96,27.36
-24,Soybean,black,185.1,33.01
-25,Yellow Peas,brown,160.12,22.77
-26,Yellow Peas,darkbrown,170.34,27.36
-27,Yellow Peas,black,163.71,33.01
+crop,province,soil_zone,input_cost,machinery_oc
+Feed Barley,Saskatchewan,brown,129.99,21.32
+Feed Barley,Saskatchewan,darkbrown,137.83,25.55
+Feed Barley,Saskatchewan,black,168.8,30.74
+Malt Barley,Saskatchewan,brown,186.2,21.32
+Malt Barley,Saskatchewan,darkbrown,193.19,25.55
+Malt Barley,Saskatchewan,black,204.48,30.74
+Oats,Saskatchewan,brown,132.24,21.32
+Oats,Saskatchewan,darkbrown,145.61,25.55
+Oats,Saskatchewan,black,180.93,30.74
+Spring Wheat,Saskatchewan,brown,191.79,21.32
+Spring Wheat,Saskatchewan,darkbrown,204.09,25.55
+Spring Wheat,Saskatchewan,black,216.21,30.74
+Canola,Saskatchewan,brown,239,22.05
+Canola,Saskatchewan,darkbrown,273.5,26.46
+Canola,Saskatchewan,black,286.87,31.88
+Yellow Peas,Saskatchewan,brown,160.12,22.77
+Yellow Peas,Saskatchewan,darkbrown,170.34,27.36
+Yellow Peas,Saskatchewan,black,163.71,33.01
+Feed Barley,Alberta,black,210.04,33.34
+Malt Barley,Alberta,black,230.81,38.04
+Canola,Alberta,black,312.4,37.61
+Oats,Alberta,black,204.12,38.47
+Yellow Peas,Alberta,black,185.48,49.58
+Spring Wheat,Alberta,black,241.89,38.47
+Feed Barley,Alberta,dark brown,183.41,34.19
+Malt Barley,Alberta,dark brown,208.21,37.61
+Canola,Alberta,dark brown,260.69,44.68
+Oats,Alberta,dark brown,175.12,36.93
+Yellow Peas,Alberta,dark brown,163.58,44.45
+Spring Wheat,Alberta,dark brown,200.01,34.78
+Feed Barley,Alberta,brown,170.41,29.06
+Malt Barley,Alberta,brown,190.21,34.71
+Canola,Alberta,brown,231.79,38.98
+Oats,Alberta,brown,168.12,35.88
+Yellow Peas,Alberta,brown,164.98,34.90
+Spring Wheat,Alberta,brown,182.01,35.28

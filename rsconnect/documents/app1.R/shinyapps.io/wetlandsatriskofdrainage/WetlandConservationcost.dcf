@@ -1,0 +1,14 @@
+name: WetlandConservationcost
+title: WetlandConservationcost
+username:
+account: wetlandsatriskofdrainage
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5755004
+bundleId: 5753164
+url: https://wetlandsatriskofdrainage.shinyapps.io/WetlandConservationcost/
+when: 1648805193.54729
+lastSyncTime: 1648805193.54729
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: oldcodes/app.R|oldcodes/crop_prices.R|oldcodes/distribution_analysis.R|oldcodes/yield.R

@@ -5,7 +5,7 @@
 #1) NPB_prop_fl: estimates annual net returns of cultivated crops with intact wetlands
 #2) NPB_prop_flwl: estimates annual net returns of cultivated crops with drained wetland  areas
 #3) simulated_npv: estimates uncertainties around annual net returns of cultivated crops
-
+set.seed(1)
 #________________________________________________________________Net-Present value___________________________________
 #1. Annual Net Returns (with intact wetland areas)
 
