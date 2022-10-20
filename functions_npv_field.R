@@ -80,30 +80,10 @@ NPB_prop_flwl <- function(crop_price, yield,  yield_wl, proportion_cultivated, p
     
       df <- df %>% dplyr::mutate(
         
-        drainage_cost = dplyr::if_else(drainagecostsimulation1 ==1, unlist(pmap_dbl(list(n=1, dr_cost*0.3, dr_cost*1.3, dr_cost),rtriangle)), dr_cost),
-        
-        yield_sim = case_when(
-          crop == "Canola" ~ round(rlnorm(n=1, 3.15, 0.35), 2),
-          crop == "Feed Barley" ~ round(runif(n=1 , 16.5, 75.9), 2),
-          crop == "Malt Barley" ~ round(rweibull(n=1 , 16.5, 75.9), 2),
-          crop == "Yellow Peas" ~ round(runif(n=1 , 10, 47.1), 2),  
-          crop == "Spring Wheat" ~ round(rgamma(n=1, shape= 5.14, rate=0.18), 2),
-          crop == "Oat" ~ round(runif(n=1, 20, 95.1), 2),
-          crop == "Fallow" ~ 0
-        ),
-        yield = dplyr::if_else(yieldsimulation1==1, yield_sim, avg_yield),
-        
+        drainage_cost = dplyr::if_else(drainagecostsimulation1 ==1, unlist(pmap_dbl(list(n=1, dr_cost*0.7, dr_cost*1.3, dr_cost),rtriangle)), dr_cost),
+        yield = dplyr::if_else(yieldsimulation1==1, unlist(pmap_dbl(list(n=1, avg_yield*0.7, avg_yield*1.3, avg_yield),rtriangle)), avg_yield),
         yield_wl = yd_diff +  yield,
-        crop_price_sim = case_when(
-          crop == "Canola" ~ round(rgamma(n=1, shape=32, rate=2), 2),  
-          crop == "Feed Barley" ~ round(runif(n=1, 3.8, 8.6), 2),
-          crop == "Malt Barley" ~ round(runif(n=1, 3.8, 8.6), 2),
-          crop == "Yellow Peas" ~ round(runif(n=1, 5.3, 12.4), 2),
-          crop == "Spring Wheat" ~ round(runif(n=1, 7.4, 10.2), 2),
-          crop == "Oat" ~ round(runif(n=1, 3.7, 8.7), 2),
-          crop == "Fallow" ~ 0
-        ),
-        crop_price = dplyr::if_else(pricesimulation1==1, crop_price_sim, avg_crop_price),
+        crop_price = dplyr::if_else(pricesimulation1==1, unlist(pmap_dbl(list(n=1, avg_crop_price*0.7, avg_crop_price*1.3, avg_crop_price),rtriangle)), avg_crop_price),
         production_cost = dplyr::if_else(productioncostsimulation1==1, unlist(pmap_dbl(list(n=1, prod_cost*0.7, prod_cost*1.7, prod_cost),rtriangle)), prod_cost),
         
   # The NPB_prop_fl is used to estimate the annual net returns (with intact wetland areas) and also estimate the uncertainties around for certain variables if needed              

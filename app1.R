@@ -19,7 +19,7 @@ library(triangle)
 library(Rmisc)
 
 #___________ Part B: Custom defined functions
-#options(warn=-1)
+options(warn=-1)
 #_______1. Thus script contains functions that are used to estimate the annual net returns of crop production and uncertainties around the estimates
 source("functions_npv_field.R")    # : It is used to calculate the annualized net returns (ANR)of wetland drainage for the field
 source("function_npv_landscape.R") #:This function is used to calculate ANR of drained wetlands in the landscape
@@ -103,7 +103,7 @@ ui <-
                                 
                                 numericInput("wetlandacre", p("How many acres of wetland do you have on your field?", style ="color: black"), 
                                              value = 0, min = 0.05, max = 37, step = 1),
-                                sliderInput("num_wetland", p("How many wetlands do you have on your field, if any?", style ="color: black"), min = 0, max = 15, value = 2, step = 1),
+                                sliderInput("num_wetland", p("How many wetlands do you have on your field, if any?", style ="color: black"), min = 0, max = 15, value = 0, step = 1),
                                 sliderInput("delayedseeding", p("How many years out of 10 do you experience delayed seeding on drained wetland areas?", 
                                                                 style ="color: black"), min = 0, max = 10, value = 0, step = 1),
                                 selectInput("uplandyd_greater", p("Is upland crop yield greater than yield on drained wetland?", 
@@ -148,7 +148,7 @@ ui <-
                                 
                               ),
                               hr(),
-                              tags$h4(p("4.  Uncertainty using best fit empirical distributions of real data (except drainage cost and production cost which varies around the mean by +/- 30% of the mean).", style = "color:black")),
+                              tags$h4(p("4.  Uncertainty (where variables vary around the mean by +/- 30% of the mean).", style = "color:black")),
                               tags$h4(tags$em("Variables: Number of simulations. yield, crop price, drainage cost and production cost variability")),
                               
                               dropdownButton(
@@ -574,6 +574,7 @@ server <- function(input, output) {
                     wetland_interference = sample(0:1, num_row1, replace=T, prob=c(input$prop_margin, (1-input$prop_margin))) #this creates the proportion of wetlands at the margins of the fields in the landscape
       ) 
     # Using the landscape_df() function to create the proportion of fields in the landscape that will be used for cultivating a specific crop
+    source("function_landscape_df.R")  # It is used to generate the fields in the landscape as well as crop yield and price distribution.
     B <- landscape_df(df = A, input$num_fields)
     
     #Creating other variables that will be needed in the annual net present value functions

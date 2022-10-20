@@ -5,10 +5,10 @@ account: wetlandsatriskofdrainage
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5755004
-bundleId: 5742150
+bundleId: 6394516
 url: https://wetlandsatriskofdrainage.shinyapps.io/WetlandConservationcost/
-when: 1648588461.5015
-lastSyncTime: 1648588461.5015
+when: 1665562288.28042
+lastSyncTime: 1665562288.28044
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: estimating_distributions.R|oldcodes/crop_prices.R|oldcodes/distribution_analysis.R|oldcodes/yield.R|overview.aux|overview.log|overview.out|overview.tex
+ignoredFiles: oldcodes/app.R|oldcodes/crop_prices.R|oldcodes/distribution_analysis.R|oldcodes/yield.R|data|Distributional_analysis_functions and data|manuscript
